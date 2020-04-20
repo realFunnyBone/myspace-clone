@@ -15,8 +15,27 @@ if(!isset($_SESSION['myspace'])) {
         echo "<b>Age: </b>" . $row['age'] . "<br>";
         echo "<b>Location: </b>" . $row['location'] . "</div><br>";
         echo "<div class='url'><div><b>MySpace URL:</b></div><div><a style=':#000;text-decoration:none;' href='profile.php?id=" . $row['id'] .  "'>https://atari0.cf/myspace2/profile.php?id=" . $row['id'] .  "</a></div></div></div>";
-        echo "<div class='topRight'><div class='userbanner'><h3><b>About Me: </b></h3></div>" . $row['description'] . "<br><br><b>Register Time:</b> " . $row['date'] . "<br>"; 
-        echo "<div class='userbanner'><h3><b>Friends: </b></h3></div>Friends aren't added yet. They will be added soon.<br><br>";
+        echo "<div class='topRight'>
+        <div class='userbanner'><h3><b>About Me: </b></h3></div>" . $row['description'] . "<br><br><b>Register Time:</b> " . $row['date'] . "<br>"; 
+        echo "<div class='userbanner'><h3><b>Friends: </b></h3></div>";
+        $stmt = $conn->prepare("SELECT * FROM friends WHERE reciever = ? AND status = ?");
+        $stmt->bind_param("ss", $row['username'], $status);
+        $status = "accepted";
+        $stmt->execute();
+        $result = $stmt->get_result();
+        while($friendsrow = $result->fetch_assoc()) {
+            echo "" . $friendsrow['sender'];
+        }   
+
+        $stmt = $conn->prepare("SELECT * FROM friends WHERE sender = ? AND status = ?");
+        $stmt->bind_param("ss", $row['username'], $status);
+        $status = "accepted";
+        $stmt->execute();
+        $result = $stmt->get_result();
+        while($friendsrow = $result->fetch_assoc()) {
+            echo "" . $friendsrow['reciever'];
+        }   
+        echo "<br><br>";
         echo "<b><div class='music'>" . $row['username'] . "'s Music:</b><br><br><audio controls='' autoplay='' src='music/" . $row['musicurl'] . "'></audio><br><br></div><hr>";
     }
 } else if(isset($_SESSION['myspace'])) {
@@ -34,8 +53,31 @@ if(!isset($_SESSION['myspace'])) {
         echo "<b>Age: </b>" . $row['age'] . "<br>";
         echo "<b>Location: </b>" . $row['location'] . "</div><br>";
         echo "<div class='url'><div><b>MySpace URL:</b></div><div><a style=':#000;text-decoration:none;' href='profile.php?id=" . $row['id'] .  "'>https://atari0.cf/myspace2/profile.php?id=" . $row['id'] .  "</a></div></div></div>";
-        echo "<div class='topRight'><div class='userbanner'><h3><b>About Me: </b></h3></div>" . $row['description'] . "<br><br><b>Register Time:</b> " . $row['date'] . "<br>"; 
-        echo "<div class='userbanner'><h3><b>Friends: </b></h3></div>Friends aren't added yet. They will be added soon.<br><br>";
+        echo "<div class='topRight'>
+        <fieldset>
+            <legend>Manage</legend>
+            <a href='settings.php'>Settings</a>
+        </fieldset>
+        <div class='userbanner'><h3><b>About Me: </b></h3></div>" . $row['description'] . "<br><br><b>Register Time:</b> " . $row['date'] . "<br>"; 
+        echo "<div class='userbanner'><h3><b>Friends: </b></h3></div>";
+        $stmt = $conn->prepare("SELECT * FROM friends WHERE reciever = ? AND status = ?");
+        $stmt->bind_param("ss", $row['username'], $status);
+        $status = "accepted";
+        $stmt->execute();
+        $result = $stmt->get_result();
+        while($friendsrow = $result->fetch_assoc()) {
+            echo "" . $friendsrow['sender'] . "<br>";
+        }   
+
+        $stmt = $conn->prepare("SELECT * FROM friends WHERE sender = ? AND status = ?");
+        $stmt->bind_param("ss", $row['username'], $status);
+        $status = "accepted";
+        $stmt->execute();
+        $result = $stmt->get_result();
+        while($friendsrow = $result->fetch_assoc()) {
+            echo "" . $friendsrow['reciever'] . "<br>";
+        }   
+        echo "<br><br>";
         echo "<b><div class='music'>" . $row['username'] . "'s Music:</b><br><br><audio controls='' autoplay='' src='music/" . $row['musicurl'] . "'></audio><br><br></div><hr>";
     }
     $stmt->close();

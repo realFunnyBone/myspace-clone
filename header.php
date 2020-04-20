@@ -61,6 +61,8 @@ img {
     border: 1px solid black;
     background-color: lightgray;
     width: 100%;
+    text-align: center;
+    padding: 10px 0px 0px 5px;
 }
 .userbanner {
     background-color: #fc9;
