@@ -6,7 +6,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 
-$conn = mysqli_connect("localhost", "username", "password", "db");
+$conn = mysqli_connect("localhost", "username", "password", "database");
 ?>
 
 <style>
@@ -70,7 +70,7 @@ img {
 }
 </style>
 <div class="header">
-    <div class="top" style=""><big><b>atari0.cf</b></big> <span style="float:right;margin-right: 5px;margin-top: 3px;font-size: small;"><a href="register.php">Sign Up</a> &bull; <a href="login.php">Login</a></span></div>
-    <div class="lowertop" style=""><small><a href="index.php">Index</a> &bull; <a href="friends.php">Manage Friends</a> &bull; <a href="blog.php">Blogs</a> <?php if(isset($_SESSION['myspace'])){ echo " &bull; <a href='settings.php'>Settings</a>"; }?></small>
+    <div class="top" style=""><big><b>atari0.cf</b></big> <span style="float:right;margin-right: 5px;margin-top: 3px;font-size: small;"><a href="register.php">Sign Up</a> &bull; <a href="login.php">Login</a> &bull; <a href='https://discord.gg/HepV8X'>Discord</a></span></div>
+    <div class="lowertop" style=""><small><a href="index.php">Index</a> &bull; <a href="viewgroups.php">Groups</a> &bull; <a href="friends.php">Manage Friends</a> &bull;  <a href="publicmessageboard.php">Public Message Board</a> &bull; <a href="blog.php">Blogs</a> <?php if(isset($_SESSION['myspace'])){ echo " &bull; <a href='settings.php'>Settings</a>"; }?></small>
 </div>
 <br>

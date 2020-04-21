@@ -1,5 +1,5 @@
 <?php
-$embedconn = mysqli_connect("localhost", "username", "password", "database");
+$embedconn = mysqli_connect("localhost", "username", "password", "db");
 ?>
 <head>
     <meta charset="utf-8">
@@ -58,12 +58,15 @@ if($_GET['id']) {
         echo "<img src='profilepictures/" . $row['profilepic'] . "'><br><br>";
         echo "<div class='userinfo'><b>Gender: </b>" . $row['gender'] . "<br>";
         echo "<b>Age: </b>" . $row['age'] . "<br>";
-        echo "<b>Location: </b>" . $row['location'] . "</div><br>";
+        echo "<b>Location: </b>" . $row['location'] . "<br>
+        <b>Group: </b>" . $row['usergroup'] . "
+        </div><br>";
         echo "<div class='url'><div><b>MySpace URL:</b></div><div><a style=':#000;text-decoration:none;' href='profile.php?id=" . $row['id'] .  "'>https://atari0.cf/myspace2/profile.php?id=" . $row['id'] .  "</a></div></div></div>";
         echo "<div class='topRight'>
         <fieldset>
             <legend>Manage</legend>
-            <a href='friend.php?user=" . $row['username'] . "'>Friend User</a>
+            <a href='friend.php?user=" . $row['username'] . "'>Friend User</a><br>
+            <a href='viewblogs.php?user=" . $row['username'] . "'>View Blogs</a>
         </fieldset>";
 
         echo "<div class='userbanner'><h3><b>About Me: </b></h3></div>" . $row['description'] . "<br><br><b>Register Time:</b> " . $row['date'] . "<br>"; 
